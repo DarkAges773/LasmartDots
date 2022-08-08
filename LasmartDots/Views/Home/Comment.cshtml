@@ -1,0 +1,27 @@
+﻿@using LasmartDots.Models
+@model LasmartDots.Models.Comment
+@{
+    ViewBag.Title = "Добавление комментария";
+}
+<form asp-action="comment" asp-controller="home">
+    <div class="form-group">
+        <label asp-for="DotId" class="control-label">Точка</label>
+        <select required type="number" asp-for="DotId" class="form-control">
+            @foreach (Dot dot in ViewBag.Dots)
+            {
+            <option value="@dot.Id">Точка @dot.Id</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="BackgroundColor" class="control-label">Цвет фона</label>
+        <input type="color" asp-for="BackgroundColor" class="form-control color-picker"/>
+    </div>    
+    <div class="form-group">
+        <label asp-for="Text" class="control-label">Комментарий</label>
+        <textarea asp-for="Text" class="form-control"></textarea>
+    </div>    
+    <div class="form-group">
+        <input type="submit" value="Отправить" class="btn btn-default" />
+    </div>
+</form>

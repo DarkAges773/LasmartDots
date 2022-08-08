@@ -1,0 +1,39 @@
+﻿@model IEnumerable<LasmartDots.Models.Dot>
+@{
+	ViewData["Title"] = "Все точки";
+}
+<table class="table">
+		<tr>
+			<td>#</td>
+			<td>Позиция X</td>
+			<td>Позиция Y</td>
+			<td>Радиус</td>
+			<td>Цвет</td>
+			<td>Комментарии</td>
+		</tr>
+	@foreach(Dot dot in Model)
+	{
+		<tr>
+			<td>@dot.Id</td>
+			<td>@dot.PosX</td>
+			<td>@dot.PosY</td>
+			<td>@dot.Radius</td>
+			<td><input type="color" diasbled value="@dot.Color"></td>
+			<td>
+				@foreach(Comment comment in dot.Comments)
+				{
+					<p>@comment.Text</p>
+				}
+			</td>
+		</tr>
+	}
+</table>
+<a class="btn btn-link" asp-action="Create">Добавить точку</a>
+<a class="btn btn-link" asp-action="Comment">Добавить комментарий</a>
+<div id="canvas-container" class="border bg-light"></div>
+@section Scripts
+{
+	<script>
+		let canvas = new APP.Canvas("canvas-container");
+	</script>
+}
